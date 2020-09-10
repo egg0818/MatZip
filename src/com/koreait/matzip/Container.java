@@ -29,6 +29,18 @@ public class Container extends HttpServlet {
 	}
 	
 	private void proc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String routerCheckResult = LoginChkInterceptor.routerChk(request);
+		
+		if(routerCheckResult != null) {
+			response.sendRedirect(routerCheckResult);
+			return;
+		}
+		
+		//로그인 되어 있으면 login, join 접속 X
+		// 로그인에 따른 접속 가능여부 판단
+		//(로그인이 안 되어 있으면 접속 할 수 있는 주소만, 나머지 전부 로그인이 되어있어야함..)
+		
 		String temp = mapper.nav(request); //보통 템플릿 파일명
 		
 		if(temp.indexOf(":") >= 0) {
@@ -58,6 +70,7 @@ public class Container extends HttpServlet {
 			temp = "/WEB-INF/view/notFound.jsp";
 			break;
 		}
+		
 		request.getRequestDispatcher(temp).forward(request, response);
 	}
 
