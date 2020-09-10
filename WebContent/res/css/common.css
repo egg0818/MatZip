@@ -18,14 +18,12 @@ a {
 .mL10 {
 	margin-left: 10px;
 }
-
 #container {
 	display: flex;
 	flex-direction:column;
 	width: 100%;
 	height: 100%;
 }
-
 #container > header {
 	padding : 10px;
 	background-color: #a29bfe;
@@ -42,6 +40,12 @@ a {
 }
 #container > header > #headerRight {
 	flex-grow: 1;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding-right: 50px;
+	font-weight: bold;
+	font-size: 1.4em;
 }
 #container > section {
 	flex-grow: 1; /* 비율 */
@@ -79,10 +83,3 @@ a {
 	border-radius: 50%;
 	overflow: hidden;
 	}
-
-
-
-
-
-
-
