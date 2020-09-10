@@ -11,8 +11,7 @@
 <body>
 	<div id="container">
 		<header>
-			<div>
-				<div>
+			<div id="headerLeft">
 					<div class="containerPImg">
 						<c:choose>
 							<c:when test="${loginUser.profile_img != null}">
@@ -23,10 +22,12 @@
 							</c:otherwise>
 						</c:choose>
 					</div>
-				</div>
-				${loginUser.nm}님 환영합니다.
+				<div class="mL10">${loginUser.nm}님 환영합니다.</div>
+				<div class="mL10" id="logout"><a href="/user/logout">로그아웃</a></div>
 			</div>
-			<div>로그아웃 / 메뉴들</div>
+			<div id="headerRight">
+				메뉴들
+			</div>
 		</header>
 		<section>
 			<jsp:include page="/WEB-INF/view/${view}.jsp"></jsp:include>

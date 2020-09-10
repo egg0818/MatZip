@@ -34,9 +34,11 @@ public class HandlerMapper {
 				return userCon.joinProc(request);
 			case "ajaxIdChk":
 				return userCon.ajaxIdChk(request);
+			case "logout":
+				return userCon.logout(request);
 			}
 			
-		case ViewRef.URI_RESTAURANT:
+		case ViewRef.URI_RESTAURANT: //restaurant
 			switch(uriArr[2]) {
 			case "restMap":
 				return restCon.restMap(request);

@@ -86,6 +86,12 @@ public class UserController {
 		
 		return String.format("ajax:{\"result\": %s}", result);
 	}
+	
+	public String logout(HttpServletRequest request) {
+		HttpSession hs = request.getSession();
+		hs.invalidate(); // 세션에 있는 데이터를 다 지운다
+		return "redirect:/user/login";
+	}
 }
 
 

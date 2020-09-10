@@ -11,6 +11,14 @@ html, body {
 	height: 100%;
 }
 
+a {
+	color: black;
+	text-decoration: none;
+}
+.mL10 {
+	margin-left: 10px;
+}
+
 #container {
 	display: flex;
 	flex-direction:column;
@@ -22,8 +30,19 @@ html, body {
 	padding : 10px;
 	background-color: #a29bfe;
 	height: 70px;
+	display: flex;
 }
-
+#container > header > #headerLeft {
+	flex-grow: 1;
+	display:flex;
+	align-items: center;
+}
+#container > header > #headerLeft > #logout > a {
+	color: blue;
+}
+#container > header > #headerRight {
+	flex-grow: 1;
+}
 #container > section {
 	flex-grow: 1; /* 비율 */
 }
@@ -53,14 +72,13 @@ html, body {
 
 .msg { color: red; }
 
-.pImg {
-	width: 100px;
-	
-}
-
-
-
-
+.containerPImg {
+	display: inline-block;	
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	overflow: hidden;
+	}
 
 
 
