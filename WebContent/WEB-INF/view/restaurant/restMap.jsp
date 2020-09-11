@@ -20,9 +20,26 @@
 	
 	function getRestaurantList() {
 		axios.get('/restaurant/getList').then(function(res) {
+		console.log(res.data);
+		
+		
+		res.data.forEach(function(item {
+			const na = {
+					'Ga': item.lng,
+					'Ha': item.lat
+			}
+			const marker = new kakao.maps.Marker({
+				position: na
+			})
+			
+			marker.setMap(map)
+		}
 			
 		})
 	}
+	
+	//테스트
+	getRestaurantList()
 	
 	/*
 	na: {
