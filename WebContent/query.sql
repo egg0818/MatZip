@@ -12,7 +12,7 @@ CREATE TABLE t_user(
 Select * FROM t_user;
 
 DROP TABLE t_restaurant;
-
+                    
 CREATE TABLE t_restaurant(
 	i_rest INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 	nm VARCHAR(20) NOT NULL,
@@ -28,6 +28,8 @@ CREATE TABLE t_restaurant(
 
 Select * FROM t_restaurant;
 
+INSERT INTO t_restaurant (nm, addr, lat, lng, cd_category, i_user)
+VALUES ('테스트','대구', 1, 2, 1, 1);
 
 CREATE TABLE c_code_m(
 	i_m INT UNSIGNED PRIMARY KEY,
@@ -61,6 +63,5 @@ c_code_mCREATE TABLE t_restaurant_menu (
 	PRIMARY KEY(i_rest, seq),
 	FOREIGN KEY(i_rest) REFERENCES t_restaurant(i_rest)
 );
-
 
 
