@@ -58,4 +58,10 @@ public class RestaurantController {
 		  
 		  return "redirect:/restaurant/restMap";
 	}
+	
+	public String ajaxGetList(HttpServletRequest request) {
+		
+		return "ajax:" + service.getRestList();
+	}
+	
 }
