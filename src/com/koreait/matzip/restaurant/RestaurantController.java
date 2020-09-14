@@ -68,18 +68,30 @@ public class RestaurantController {
 	
 	public String restDetail(HttpServletRequest request) {
 		  int i_rest = CommonUtils.getIntParameter(request, "i_rest");
-		  System.out.println("i_user : " + i_rest);
 		
 		  RestaurantDomain param = new RestaurantDomain();
 		  param.setI_rest(i_rest);
 		  
-		  int result = service.selRestDetail(param);
-		  
-		  request.setAttribute("data", param);
+		  request.setAttribute("data", service.selRestDetail(param));
 		  
 	      request.setAttribute(Const.TITLE, "디테일");
 	      request.setAttribute(Const.VIEW, "restaurant/restDetail");
 	      return ViewRef.TEMP_MENU_TEMP;
+	}
+	
+	public String addRecMenusProc(HttpServletRequest request) {
+		
+		int i_rest = CommonUtils.getIntParameter(request, "i_rest");
+		
+		String[] menu_nmArr = request.getParameterValues("menu_nm");
+		String[] menu_priceArr = request.getParameterValues("menu_price");
+		
+		// 값확인용
+		for(int i=0; i<menu_nmArr.length; i++) {
+			System.out.println(i + ":" + menu_nmArr[i] + ", " + menu_priceArr[i]);
+		}
+		
+		return "redirect:/restaurant/restDetail?i_rest=" + i_rest;
 	}
 	
 }

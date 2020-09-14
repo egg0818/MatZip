@@ -26,12 +26,19 @@ CREATE TABLE t_restaurant(
 	FOREIGN KEY (i_user) REFERENCES t_user(i_user)
 );
 
-SELECT A.i_rest, A.i_user, A.nm, A.addr,C.val as cd_category_nm
+
+-- 글 디테일 
+SELECT A.i_rest, A.i_user, A.nm, A.addr, A.hits, B.val AS cd_category_nm, IFNULL(C.cnt,0) AS cntFavorite
 FROM t_restaurant A
-LEFT JOIN t_user B
-ON A.i_user = B.i_user
-LEFT JOIN c_code_d C
-ON A.cd_category = C.cd
+LEFT JOIN c_code_d B
+ON A.cd_category = B.cd
+AND B.i_m = 1
+LEFT JOIN (
+	SELECT i_rest, COUNT(i_rest) AS cnt
+	FROM t_user_favorite
+	GROUP BY i_rest
+) C
+ON A.i_rest = C.i_rest
 WHERE A.i_rest = 10
 ;
 
@@ -66,7 +73,7 @@ CREATE TABLE t_restaurant_recommend_menu (
 	FOREIGN KEY(i_rest) REFERENCES t_restaurant(i_rest)
 );
 
-c_code_mCREATE TABLE t_restaurant_menu (
+CREATE TABLE t_restaurant_menu (
 	i_rest INT UNSIGNED,
 	seq INT UNSIGNED,
 	menu_pic VARCHAR(50),
@@ -74,4 +81,11 @@ c_code_mCREATE TABLE t_restaurant_menu (
 	FOREIGN KEY(i_rest) REFERENCES t_restaurant(i_rest)
 );
 
-
+CREATE TABLE t_user_favorite(
+	i_rest INT UNSIGNED,
+	i_user INT UNSIGNED,
+	r_dt DATETIME DEFAULT NOW(),
+	PRIMARY KEY(i_rest, i_user),
+	FOREIGN KEY(i_rest) REFERENCES t_restaurant(i_rest),
+	FOREIGN KEY(i_user) REFERENCES t_user(i_user)
+);

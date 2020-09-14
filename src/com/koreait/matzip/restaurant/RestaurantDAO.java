@@ -61,22 +61,29 @@ public class RestaurantDAO {
 	}
 	
 	
-	public static int selRestDetail(RestaurantDomain param) {
+	public static RestaurantDomain selRestDetail(RestaurantDomain param) {
 		
-		String sql = " SELECT A.i_rest, A.i_user, A.nm, A.addr, C.val as cd_category_nm"
-				+ " FROM t_restaurant A "
-				+ " LEFT JOIN t_user B "
-				+ " ON A.i_user = B.i_user "
-				+ " LEFT JOIN c_code_d C "
-				+ " ON A.cd_category = C.cd "
+		String sql = " SELECT A.i_rest, A.i_user, A.nm, A.addr, A.hits, B.val AS cd_category_nm, IFNULL(C.cnt,0) AS cntFavorite "
+				+ "	FROM t_restaurant A "
+				+ " LEFT JOIN c_code_d B "
+				+ " ON A.cd_category = B.cd"
+				+ " AND B.i_m = 1"
+				+ " LEFT JOIN ("
+				+ " 	SELECT i_rest, COUNT(i_rest) AS cnt"
+				+ " 	FROM t_user_favorite"
+				+ "		WHERE i_rest = ?"
+				+ " 	GROUP BY i_rest"
+				+ " ) C"
+				+ " ON A.i_rest = C.i_rest "
 				+ " WHERE A.i_rest = ? ";
+				
 		
 		JdbcTemplate.executeQuery(sql, new JdbcSelectInterface(){
 
 			@Override
 			public void prepared(PreparedStatement ps) throws SQLException {
 				ps.setInt(1, param.getI_rest());
-				
+				ps.setInt(2, param.getI_rest());
 			}
 
 			@Override
@@ -87,10 +94,12 @@ public class RestaurantDAO {
 					param.setNm(rs.getString("nm"));
 					param.setAddr(rs.getString("addr"));
 					param.setCd_category_nm(rs.getString("cd_category_nm"));
+					param.setCntHits(rs.getInt("hits"));
+					param.setCntFavorite(rs.getInt("cntFavorite"));
 				}
 			}});
 		
-		return 0;
+		return param;
 	}
 	
 }

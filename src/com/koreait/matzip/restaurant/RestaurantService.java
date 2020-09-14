@@ -13,7 +13,7 @@ public class RestaurantService {
 		dao = new RestaurantDAO();
 	}
 	
-	public int selRestDetail(RestaurantDomain param) {
+	public RestaurantDomain selRestDetail(RestaurantDomain param) {
 		return dao.selRestDetail(param);
 	}
 	
