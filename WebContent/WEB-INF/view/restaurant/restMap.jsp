@@ -15,36 +15,46 @@
 	};
 
 	const map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-	
+
 	console.log(map.getCenter())
 	
+	
 	function getRestaurantList() {
-		axios.get('/restaurant/getList').then(function(res) {
-		console.log(res.data);
-		
-		
-		res.data.forEach(function(item {
-			const na = {
-					'Ga': item.lng,
-					'Ha': item.lat
-			}
-			const marker = new kakao.maps.Marker({
-				position: na
+		axios.get('/restaurant/ajaxGetList').then(function(res) {
+			console.log(res.data)
+
+			res.data.forEach(function(item) {
+				var mPos = new kakao.maps.LatLng(item.lat, item.lng)
+
+				var marker = new kakao.maps.Marker({
+					position : mPos
+				});
+
+				marker.setMap(map)
 			})
-			
-			marker.setMap(map)
-		}
-			
 		})
 	}
-	
-	//테스트
+
 	getRestaurantList()
 	
-	/*
-	na: {
-		Ga: 35.8484577
-		Ha: 128.5713276
-	}
-	*/
+		// check for Geolocation support
+		if (navigator.geolocation) {
+		  console.log('Geolocation is supported!');
+		  
+		  var startPos;		  
+		  navigator.geolocation.getCurrentPosition(function(pos) {		
+			  	startPos = pos			  
+			    console.log('lat : ' + startPos.coords.latitude)
+			    console.log('lng : ' + startPos.coords.longitude)
+			    
+			    if(map) {
+				    var moveLatLon = new kakao.maps.LatLng(startPos.coords.latitude, startPos.coords.longitude)
+				    map.panTo(moveLatLon)			    	
+			    }
+		  });
+		  
+		} else {
+		  console.log('Geolocation is not supported for this Browser/OS.');
+		}
+	
 </script>

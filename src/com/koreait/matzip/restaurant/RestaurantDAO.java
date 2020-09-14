@@ -32,6 +32,7 @@ public class RestaurantDAO {
 			}});
 	}
 	
+	
 	public List<RestaurantDomain> selRestList() {
 		List<RestaurantDomain> list = new ArrayList();
 		
@@ -44,12 +45,15 @@ public class RestaurantDAO {
 
 			@Override
 			public void executeQuery(ResultSet rs) throws SQLException {
-				RestaurantDomain vo = new RestaurantDomain();
-				vo.setI_rest(rs.getInt("i_rest"));
-				vo.setNm(rs.getNString("nm"));
-				vo.setLat(rs.getDouble("lat"));
-				vo.setLng(rs.getDouble("lng"));
-				list.add(vo);
+				while(rs.next()) {
+					RestaurantDomain vo = new RestaurantDomain();
+					vo.setI_rest(rs.getInt("i_rest"));
+					vo.setNm(rs.getNString("nm"));
+					vo.setLat(rs.getDouble("lat"));
+					vo.setLng(rs.getDouble("lng"));
+					
+					list.add(vo);
+				}
 				
 			}});
 		
