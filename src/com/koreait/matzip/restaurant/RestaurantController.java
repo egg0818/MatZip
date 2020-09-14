@@ -3,9 +3,11 @@ package com.koreait.matzip.restaurant;
 import javax.servlet.http.HttpServletRequest;
 
 import com.koreait.matzip.CommonDAO;
+import com.koreait.matzip.CommonUtils;
 import com.koreait.matzip.Const;
 import com.koreait.matzip.SecurityUtils;
 import com.koreait.matzip.ViewRef;
+import com.koreait.matzip.vo.RestaurantDomain;
 import com.koreait.matzip.vo.RestaurantVO;
 import com.koreait.matzip.vo.UserVO;
 
@@ -62,6 +64,22 @@ public class RestaurantController {
 	public String ajaxGetList(HttpServletRequest request) {
 		
 		return "ajax:" + service.getRestList();
+	}
+	
+	public String restDetail(HttpServletRequest request) {
+		  int i_rest = CommonUtils.getIntParameter(request, "i_rest");
+		  System.out.println("i_user : " + i_rest);
+		
+		  RestaurantDomain param = new RestaurantDomain();
+		  param.setI_rest(i_rest);
+		  
+		  int result = service.selRestDetail(param);
+		  
+		  request.setAttribute("data", param);
+		  
+	      request.setAttribute(Const.TITLE, "디테일");
+	      request.setAttribute(Const.VIEW, "restaurant/restDetail");
+	      return ViewRef.TEMP_MENU_TEMP;
 	}
 	
 }

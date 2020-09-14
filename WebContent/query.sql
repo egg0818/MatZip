@@ -26,6 +26,16 @@ CREATE TABLE t_restaurant(
 	FOREIGN KEY (i_user) REFERENCES t_user(i_user)
 );
 
+SELECT A.i_rest, A.i_user, A.nm, A.addr,C.val as cd_category_nm
+FROM t_restaurant A
+LEFT JOIN t_user B
+ON A.i_user = B.i_user
+LEFT JOIN c_code_d C
+ON A.cd_category = C.cd
+WHERE A.i_rest = 10
+;
+
+
 Select * FROM t_restaurant;
 
 INSERT INTO t_restaurant (nm, addr, lat, lng, cd_category, i_user)

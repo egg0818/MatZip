@@ -60,4 +60,37 @@ public class RestaurantDAO {
 		return list;
 	}
 	
+	
+	public static int selRestDetail(RestaurantDomain param) {
+		
+		String sql = " SELECT A.i_rest, A.i_user, A.nm, A.addr, C.val as cd_category_nm"
+				+ " FROM t_restaurant A "
+				+ " LEFT JOIN t_user B "
+				+ " ON A.i_user = B.i_user "
+				+ " LEFT JOIN c_code_d C "
+				+ " ON A.cd_category = C.cd "
+				+ " WHERE A.i_rest = ? ";
+		
+		JdbcTemplate.executeQuery(sql, new JdbcSelectInterface(){
+
+			@Override
+			public void prepared(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, param.getI_rest());
+				
+			}
+
+			@Override
+			public void executeQuery(ResultSet rs) throws SQLException {
+				if(rs.next()) {
+					param.setI_rest(rs.getInt("i_rest"));
+					param.setI_user(rs.getInt("i_user"));
+					param.setNm(rs.getString("nm"));
+					param.setAddr(rs.getString("addr"));
+					param.setCd_category_nm(rs.getString("cd_category_nm"));
+				}
+			}});
+		
+		return 0;
+	}
+	
 }
