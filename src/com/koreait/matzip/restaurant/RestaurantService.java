@@ -44,6 +44,10 @@ public class RestaurantService {
 		return list;
 	}
 	
+	public int delRecMenu(RestaurantRecommendMenuVO param) {
+		return dao.delRecMenu(param);
+	}
+	
 	
 	public int addRecMenus(HttpServletRequest request) {
 		

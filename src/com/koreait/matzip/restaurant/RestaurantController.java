@@ -14,6 +14,7 @@ import com.koreait.matzip.FileUtils;
 import com.koreait.matzip.SecurityUtils;
 import com.koreait.matzip.ViewRef;
 import com.koreait.matzip.vo.RestaurantDomain;
+import com.koreait.matzip.vo.RestaurantRecommendMenuVO;
 import com.koreait.matzip.vo.RestaurantVO;
 import com.koreait.matzip.vo.UserVO;
 import com.oreilly.servlet.MultipartRequest;
@@ -91,5 +92,17 @@ public class RestaurantController {
 	public String addRecMenusProc(HttpServletRequest request) {
 		int i_rest = service.addRecMenus(request);
 		return "redirect:/restaurant/restDetail?i_rest=" + i_rest;
+	}
+	
+	public String ajaxDelRecMenu(HttpServletRequest request) {
+		int i_rest = CommonUtils.getIntParameter(request, "i_rest");
+		int seq = CommonUtils.getIntParameter(request, "seq");
+		
+		RestaurantRecommendMenuVO param = new RestaurantRecommendMenuVO();
+		param.setI_rest(i_rest);
+		param.setSeq(seq);
+		
+		int result = service.delRecMenu(param);
+		return "ajax:" + result;
 	}
 }

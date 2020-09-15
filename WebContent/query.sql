@@ -90,3 +90,11 @@ CREATE TABLE t_user_favorite(
 	FOREIGN KEY(i_rest) REFERENCES t_restaurant(i_rest),
 	FOREIGN KEY(i_user) REFERENCES t_user(i_user)
 );
+
+SELECT IFNULL(MAX(seq), 0) + 1, 1, '메뉴1', 10000, NULL
+FROM t_restaurant_recommend_menu 
+WHERE i_rest = 9;
+
+SELECT * FROM t_restaurant_recommend_menu;
+
+SELECT * FROM t_restaurant;
