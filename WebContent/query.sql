@@ -36,6 +36,7 @@ AND B.i_m = 1
 LEFT JOIN (
 	SELECT i_rest, COUNT(i_rest) AS cnt
 	FROM t_user_favorite
+	WHERE i_rest = 10 
 	GROUP BY i_rest
 ) C
 ON A.i_rest = C.i_rest

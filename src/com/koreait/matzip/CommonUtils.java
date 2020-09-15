@@ -3,9 +3,15 @@ package com.koreait.matzip;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+
 public class CommonUtils {
-	public static int getIntParameter(HttpServletRequest request, String keyNm) {
-		return parseStrToInt(request.getParameter(keyNm));
+	public static int getIntParameter(MultipartRequest request, String key) {
+		return parseStrToInt(request.getParameter(key));
+	}
+	
+	public static int getIntParameter(HttpServletRequest request, String key) {
+		return parseStrToInt(request.getParameter(key));
 	}
 	
 	public static int parseStrToInt(String str) {
