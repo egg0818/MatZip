@@ -82,6 +82,7 @@ public class RestaurantController {
 		
 		request.setAttribute("css", new String[]{"restaurant"});
 		request.setAttribute("recommendMenuList", service.getRecommendMenuList(i_rest));
+		request.setAttribute("menuList", service.getMenuList(i_rest));
 		request.setAttribute("data", service.selRestDetail(param));
 		request.setAttribute(Const.TITLE, "디테일");
 		request.setAttribute(Const.VIEW, "restaurant/restDetail");

@@ -40,8 +40,14 @@ public class RestaurantService {
 		return gson.toJson(list);
 	}
 	
+	
 	public List<RestaurantRecommendMenuVO> getRecommendMenuList(int i_rest) {
 		List<RestaurantRecommendMenuVO> list = dao.selRecommendMenuList(i_rest);
+		return list;
+	}
+	
+	public List<RestaurantRecommendMenuVO> getMenuList(int i_rest) {
+		List<RestaurantRecommendMenuVO> list = dao.selMenuList(i_rest);
 		return list;
 	}
 	
@@ -49,7 +55,7 @@ public class RestaurantService {
 		return dao.delRecMenu(param);
 	}
 	
-
+	// addRecMenus 보다 이게나음, 파일 다중 업로드!!
 	public int addMenus(HttpServletRequest request) { //메뉴 
 		RestaurantRecommendMenuVO param = new RestaurantRecommendMenuVO();
 		int i_rest = CommonUtils.getIntParameter(request, "i_rest");
@@ -61,7 +67,7 @@ public class RestaurantService {
 		
         try {
         	for (Part part : request.getParts()) {
-                String fileName = FileUtils.getFileName(part);
+                String fileName = part.getSubmittedFileName();
                 System.out.println("fileName : " + fileName);
                 if(fileName != null) {	 
                 	String ext = FileUtils.getExt(fileName);
