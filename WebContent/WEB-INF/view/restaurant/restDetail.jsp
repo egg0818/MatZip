@@ -88,8 +88,23 @@
 							</tr>
 							<tr>
 								<th>메뉴</th>
-								<td>
-									
+								<td>	
+									<div class="menuList">
+										<c:if test="${fn:length(menuList) > 0}">
+										<c:forEach var="i" begin="0" end="${fn:length(menuList) > 3 ? 2 : fn:length(menuList) - 1}">
+											<div class="menuItem">
+												<img src="/res/img/restaurant/${data.i_rest}/menu/${menuList[i].menu_pic}">
+											</div>
+										</c:forEach>
+										<c:if test="${fn:length(menuList) > 3}">
+											<div class="menuItem bg_black">
+												<div class="moreCnt">
+													+${fn:length(menuList) - 3}
+												</div>
+											</div>
+										</c:if>
+										</c:if>
+									</div>
 								</td>
 							</tr>
 						</tbody>

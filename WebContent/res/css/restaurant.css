@@ -1,4 +1,3 @@
-  
 @charset "UTF-8";
 .recMenuContainer {
 	width: 100%;
@@ -23,6 +22,7 @@
 .recMenuContainer > .recMenuItem > .pic > img {
 	width: 100%;
 }
+
 .recMenuContainer > .recMenuItem > .info {
 	margin-top : 25px;
 	width: 100%;
@@ -34,4 +34,38 @@
 	position: absolute;
 	top: 10px;
 	right:10px;
+}
+
+
+.menuList {
+	display: flex;
+	height: 70px;
+}
+
+.menuList .menuItem {
+	width: 70px;
+	height: 70px;
+	color: white;
+	background: black;
+}
+
+.menuList .menuItem:not(:first-child) {
+	margin-left: 4px;
+}
+
+.menuList .menuItem img {
+	width: 100%;
+	height: 100%;
+}
+
+.menuList .menuItem .moreCnt {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.restaurant-detail {
+	padding: 5px 0 10px 0;
 }

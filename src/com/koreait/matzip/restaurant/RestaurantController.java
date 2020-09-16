@@ -37,7 +37,6 @@ public class RestaurantController {
 	public String restReg(HttpServletRequest request) {
 		final int I_M = 1; // 카테고리 코드
 		request.setAttribute("categoryList", CommonDAO.selCodeList(I_M));
-
 		request.setAttribute(Const.TITLE, "가게등록");
 		request.setAttribute(Const.VIEW, "restaurant/restReg");
 		return ViewRef.TEMP_MENU_TEMP;
