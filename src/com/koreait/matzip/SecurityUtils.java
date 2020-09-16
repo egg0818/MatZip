@@ -19,6 +19,10 @@ public class SecurityUtils {
 	public static boolean isLogout(HttpServletRequest request) {
 		return getLoginUser(request) == null;
 	}
+	
+	public static int getLoginUserPk(HttpServletRequest request) {
+		return getLoginUser(request).getI_user();
+	}
 
 	public static String generateSalt() {
 		Random random = new Random();

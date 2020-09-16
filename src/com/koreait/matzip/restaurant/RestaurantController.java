@@ -71,7 +71,6 @@ public class RestaurantController {
 	}
 
 	public String ajaxGetList(HttpServletRequest request) {
-
 		return "ajax:" + service.getRestList();
 	}
 
@@ -97,10 +96,12 @@ public class RestaurantController {
 	public String ajaxDelRecMenu(HttpServletRequest request) {
 		int i_rest = CommonUtils.getIntParameter(request, "i_rest");
 		int seq = CommonUtils.getIntParameter(request, "seq");
+		int i_user = SecurityUtils.getLoginUserPk(request);
 		
 		RestaurantRecommendMenuVO param = new RestaurantRecommendMenuVO();
 		param.setI_rest(i_rest);
 		param.setSeq(seq);
+		param.setI_user(i_user);
 		
 		int result = service.delRecMenu(param);
 		return "ajax:" + result;

@@ -98,3 +98,18 @@ WHERE i_rest = 9;
 SELECT * FROM t_restaurant_recommend_menu;
 
 SELECT * FROM t_restaurant;
+
+SELECT * FROM t_user;
+
+DELETE FROM t_restaurant_recommend_menu WHERE i_rest=9 AND seq=1;
+
+
+-- 조인해서 삭제 (글쓴이의 정보(i_user)가  t_restaurant에 있음 ) 
+DELETE A -- A테이블만 지운다는 의미 둘다 지울거면 A, B 쓰면 됨
+FROM t_restaurant_recommend_menu A
+INNER JOIN t_restaurant B
+ON A.i_rest = B.i_rest
+WHERE A.i_rest = 9
+AND A.seq = 10
+AND B.i_user = 1;
+

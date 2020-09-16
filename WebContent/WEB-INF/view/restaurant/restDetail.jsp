@@ -7,13 +7,23 @@
 		<div>
 			<c:if test="${loginUser.i_user == data.i_user}">
 				<div class="recMenuItem">
-					<button onclick="isDel()">삭제</button>
+					<button onclick="isDel()">가게 삭제</button>
 					<form id="recFrm" action="/restaurant/addRecMenusProc" enctype="multipart/form-data" method="post">
 					<!-- 파일넣을때 enctype가 필요 -->
 						<div><button type="button" onclick="addRecMenu()">메뉴 추가</button></div>
 						<input type="hidden" name="i_rest" value="${data.i_rest}">
 						<div id="recItem">
 						</div>
+						<div><input type="submit" value="등록"></div>
+					</form>
+				</div>
+				
+				<h2>- 메뉴 -</h2>
+				<div>
+					<form id="menuFrm" action="/restaurant/addMenusProc" enctype="multipart/form-data">
+						<input type="hidden" name="i_rest" value="${data.i_rest}">
+						<input type="file"  name="menu_pic" multiple>
+						<div id="menuItem"></div>
 						<div><input type="submit" value="등록"></div>
 					</form>
 				</div>
@@ -71,13 +81,16 @@
 </div>
 <script src="http://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+
 	function delRecMenu(i_rest, seq) {
 		console.log('i_rest : ' + i_rest)
 		console.log('seq : ' + seq)
 		
 		axios.get('/restaurant/ajaxDelRecMenu', {
 			params: {
-				i_rest, seq
+				// i_rest : ${data.i_rest} 가능. el식은 서버에서 자바가 쓰는거다. 자스에선 못씀
+				'i_rest': i_rest,
+				'seq': seq
 			}
 		}).then(function(res) {
 			if(res.data == 1) {
@@ -87,7 +100,10 @@
 			}
 		})
 	}
+	
+	
 	var idx = 0;
+	
 	function addRecMenu() {
 		var div = document.createElement('div')
 			
@@ -110,6 +126,7 @@
 			
 		recItem.append(div)
 	}
+	
 	addRecMenu()
 		
 	function isDel() {

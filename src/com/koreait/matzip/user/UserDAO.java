@@ -48,7 +48,7 @@ public class UserDAO {
 					result.setUser_id(rs.getString("user_id"));
 					result.setUser_pw(rs.getString("user_pw"));
 					result.setSalt(rs.getString("salt"));
-					result.setNm(rs.getNString("nm"));
+					result.setNm(rs.getString("nm"));
 					result.setProfile_img(rs.getString("profile_img"));
 					result.setR_dt(rs.getString("r_dt"));
 				}
