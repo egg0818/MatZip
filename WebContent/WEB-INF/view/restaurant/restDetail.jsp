@@ -1,49 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div>
 	<div id="sectionContainerCenter">
 		<div>
 			<c:if test="${loginUser.i_user == data.i_user}">
-				<div class="recMenuItem">
-					<button onclick="isDel()">가게 삭제</button>
-					<form id="recFrm" action="/restaurant/addRecMenusProc" enctype="multipart/form-data" method="post">
+				<button onclick="isDel()">가게 삭제</button>
+				<h2>- 추천메뉴 -</h2>
+				<form id="recFrm" action="/restaurant/addRecMenusProc"
+					enctype="multipart/form-data" method="post">
 					<!-- 파일넣을때 enctype가 필요 -->
-						<div><button type="button" onclick="addRecMenu()">메뉴 추가</button></div>
-						<input type="hidden" name="i_rest" value="${data.i_rest}">
-						<div id="recItem">
-						</div>
-						<div><input type="submit" value="등록"></div>
-					</form>
-				</div>
-				
+					<div>
+						<button type="button" onclick="addRecMenu()">메뉴 추가</button>
+					</div>
+					<input type="hidden" name="i_rest" value="${data.i_rest}">
+					<div id="recItem"></div>
+					<div>
+						<input type="submit" value="등록">
+					</div>
+				</form>
+
+
 				<h2>- 메뉴 -</h2>
 				<div>
-					<form id="menuFrm" action="/restaurant/addMenusProc" enctype="multipart/form-data">
+					<form id="menuFrm" action="/restaurant/addMenusProc"
+						enctype="multipart/form-data" method="post">
 						<input type="hidden" name="i_rest" value="${data.i_rest}">
-						<input type="file"  name="menu_pic" multiple>
+						<input type="file" name="menu_pic" multiple>
 						<div id="menuItem"></div>
-						<div><input type="submit" value="등록"></div>
+						<div>
+							<input type="submit" value="등록">
+						</div>
 					</form>
 				</div>
 			</c:if>
+
 			<div class="recMenuContainer">
 				<c:forEach items="${recommendMenuList}" var="item">
 					<div class="recMenuItem" id="recMenuItem_${item.seq}">
 						<div class="pic">
 							<c:if test="${item.menu_pic != null && item.menu_pic != ''}">
-								<img alt="" src="/res/img/restaurant/${data.i_rest}/${item.menu_pic}">
+								<img alt=""
+									src="/res/img/restaurant/${data.i_rest}/${item.menu_pic}">
 							</c:if>
 						</div>
 						<div class="info">
 							<div class="nm">${item.menu_nm}</div>
-							<div class="price"><fmt:formatNumber type="number" value="${item.menu_price}"/></div>
+							<div class="price">
+								<fmt:formatNumber type="number" value="${item.menu_price}" />
+							</div>
 						</div>
 						<c:if test="${loginUser.i_user == data.i_user}">
-						<div class="delIconContainer" onclick="delRecMenu(${data.i_rest}, ${item.seq})">
-							<span class="material-icons">clear</span>
-						</div>
+							<div class="delIconContainer"
+								onclick="delRecMenu(${data.i_rest}, ${item.seq})">
+								<span class="material-icons">clear</span>
+							</div>
 						</c:if>
 					</div>
 				</c:forEach>
@@ -56,8 +68,8 @@
 						</span>
 					</div>
 					<div class="status branch_none">
-						<span class="cnt hit">${data.cntHits}</span>
-						<span class="cnt favorite">${data.cntFavorite}</span>
+						<span class="cnt hit">${data.cntHits}</span> <span
+							class="cnt favorite">${data.cntFavorite}</span>
 					</div>
 				</div>
 				<div>

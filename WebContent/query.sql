@@ -107,9 +107,18 @@ DELETE FROM t_restaurant_recommend_menu WHERE i_rest=9 AND seq=1;
 -- 조인해서 삭제 (글쓴이의 정보(i_user)가  t_restaurant에 있음 ) 
 DELETE A -- A테이블만 지운다는 의미 둘다 지울거면 A, B 쓰면 됨
 FROM t_restaurant_recommend_menu A
-INNER JOIN t_restaurant B
+INNER JOIN t_restaurant Bt_restaurant_menu
 ON A.i_rest = B.i_rest
 WHERE A.i_rest = 9
 AND A.seq = 10
 AND B.i_user = 1;
+
+SELECT * FROM t_restaurant_menu;
+
+-- t_restaurant_menu 에 삽입값
+INSERT INTO t_restaurant_menu
+(i_rest, seq, menu_pic)
+SELECT 9, IFNULL(MAX(seq), 0) + 1, 'aaa'
+FROM t_restaurant_menu
+WHERE i_rest = 9
 

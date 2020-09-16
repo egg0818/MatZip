@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
 
 import com.google.gson.Gson;
 import com.koreait.matzip.CommonUtils;
@@ -48,6 +49,38 @@ public class RestaurantService {
 		return dao.delRecMenu(param);
 	}
 	
+
+	public int addMenus(HttpServletRequest request) { //메뉴 
+		RestaurantRecommendMenuVO param = new RestaurantRecommendMenuVO();
+		int i_rest = CommonUtils.getIntParameter(request, "i_rest");
+		String savePath = request.getServletContext().getRealPath("/res/img/restaurant");
+		String tempPath = savePath + "/" + i_rest + "/menu/"; //임시	
+		System.out.println("i_rest : " + i_rest);
+		
+		FileUtils.makeFolder(tempPath);
+		
+        try {
+        	for (Part part : request.getParts()) {
+                String fileName = FileUtils.getFileName(part);
+                System.out.println("fileName : " + fileName);
+                if(fileName != null) {	 
+                	String ext = FileUtils.getExt(fileName);
+                	String saveFileNm = UUID.randomUUID() + ext;
+                	System.out.println("saveFileNm : " + saveFileNm);
+                	
+                	part.write(tempPath + "/" + saveFileNm);
+              
+                	param.setMenu_pic(saveFileNm);
+                	param.setI_rest(i_rest);
+                	dao.insMenu(param);
+            }   
+                
+        	}
+        } catch(Exception e) {
+        	e.printStackTrace();
+        }
+		return i_rest;
+	}
 	
 	public int addRecMenus(HttpServletRequest request) {
 		
@@ -112,6 +145,7 @@ public class RestaurantService {
 					String ext = FileUtils.getExt(originFileNm);
 					// saveFileNm 저장용 파일네임
 					// 파일명 + 확장자
+					// UUID.randomUUID() : 중복방지, 한글이나 특수문자 변경
 					String saveFileNm = UUID.randomUUID() + ext;
 					
 					System.out.println("saveFileNm : " + saveFileNm);				

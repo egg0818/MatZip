@@ -88,10 +88,16 @@ public class RestaurantController {
 		return ViewRef.TEMP_MENU_TEMP;
 	}
 	
+	public String addMenusProc(HttpServletRequest request) { //메뉴
+		int i_rest = service.addMenus(request);
+		return "redirect:/restaurant/restDetail?i_rest=" + i_rest;
+	}
+	
 	public String addRecMenusProc(HttpServletRequest request) {
 		int i_rest = service.addRecMenus(request);
 		return "redirect:/restaurant/restDetail?i_rest=" + i_rest;
 	}
+	
 	
 	public String ajaxDelRecMenu(HttpServletRequest request) {
 		int i_rest = CommonUtils.getIntParameter(request, "i_rest");
