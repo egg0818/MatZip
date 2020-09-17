@@ -1,0 +1,101 @@
+?
+ㅡ 식당 리뷰할 수 있는 서비스 ㅡ
+(사진 올리기 기능, )
+
+GET POST
+
+
+서블릿 1개  - 분기시켜주는 객체 (HandlerMapping)
+
+- 컨트롤러(기존에 만들던 서블릿)  -  서비스 (로직)  -  DAO
+
+http://localhost:8089/ (컨트롤러 구분) / (호출할 메소드 구분)
+
+
+
+ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ
+
+
+★ split() 메소드 설명 (비파괴) ★
+
+ex)  String a = "abc,def,ghi,jkl";        이라고 있을경우
+
+String test[] = url.split(",");     이렇게 ,(콤마) 기준으로 짤라서 배열로 반환한다
+
+for(int i=0; i<test.length; i++) {
+	System.out.println("aaa[" + i + "] : " + aaa[i]);
+}
+
+
+난이도 2
+
+
+
+ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ
+
+
+
+★ 서블릿에서 애노미테이션 주소값을 ("/") 로 줄경우 주소창 연결하는 방법 ★
+
+서블릿 @WebServlet("/")
+
+
+
+1. 기본 패키지에 메소드 추가 (com.jy.matzip)
+
+public class StaticContainer extends DefaultServlet {}
+
+
+
+2. web.xml 에서 아래소스 추가
+
+<servlet>
+	    <servlet-name>staticServlet</servlet-name>
+	    <servlet-class>com.koreait.matzip.StaticContainer</servlet-class>  
+	</servlet>
+   
+    <servlet-mapping>
+            <servlet-name>staticServlet</servlet-name>
+            <url-pattern>/res/*</url-pattern>
+    </servlet-mapping>
+
+
+
+<servlet-class>  패키지명 잡아주기
+<url-pattern> 주소값 잡아주기
+
+
+
+
+3. 크롬 브라우저창에서 MatZip 프로젝트 기준
+http://localhost:8089/res/js/test.js   검색하였을시 자바스크립(내가적은거) 가 떠야됨 
+
+
+
+ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ
+
+
+favicon (파비콘) - 웹브라우저 상단 탭에 마크모양 뜨는 것
+
+
+ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ
+
+
+
+
+ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ
+
+
+
+
+ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ
+
+
+
+
+ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ
+
+
+
+
+ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ	ㅡ
